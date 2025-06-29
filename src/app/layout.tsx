@@ -1,3 +1,9 @@
+import { AppSidebar } from '@/components/app-sidebar'
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@/components/ui/sidebar'
 import { MyRuntimeProvider } from '@/providers/assistant-ui-provider'
 import '@/styles/global.css'
 import type { Metadata } from 'next'
@@ -16,13 +22,19 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <SessionProvider>
-      <MyRuntimeProvider>
-        <html lang="es-MX" className="h-full">
-          <body className="h-full">
-            <main className="h-full">{children}</main>
-          </body>
-        </html>
-      </MyRuntimeProvider>
+      <html lang="es-MX" className="h-full">
+        <body className="h-full">
+          <SidebarProvider>
+            <AppSidebar />
+            <MyRuntimeProvider>
+              <SidebarInset>
+                <SidebarTrigger />
+                {children}
+              </SidebarInset>
+            </MyRuntimeProvider>
+          </SidebarProvider>
+        </body>
+      </html>
     </SessionProvider>
   )
 }

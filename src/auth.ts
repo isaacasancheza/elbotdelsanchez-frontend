@@ -28,8 +28,8 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     },
     async session({ token, session }) {
       if (token) {
-        session.profile = token.profile as Profile
         session.idToken = token.idToken as string
+        session.profile = token.profile as Profile
         session.accessToken = token.accessToken as string
       }
       return session

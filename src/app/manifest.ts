@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'El Bot del Sánchez',
-    short_name: 'Bot',
+    short_name: 'El Bot',
     description: 'Pregunta lo que sea y sorpréndete con las respuestas.',
     start_url: './',
     display: 'standalone',
