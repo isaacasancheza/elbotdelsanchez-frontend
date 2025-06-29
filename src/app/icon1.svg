@@ -1,0 +1,22 @@
+<svg width="100%" height="100%" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <style>
+        path {
+            fill: black;
+        }
+        @media (prefers-color-scheme: dark) {
+            path { 
+                fill: white; 
+            }
+        }
+    </style>
+    <g transform="matrix(1,0,0,1,-28.0409,-56.4905)">
+        <g transform="matrix(3.125,0,0,3.125,-178.209,56.4905)">
+            <rect x="66" y="0" width="16" height="16" style="fill:none;"/>
+            <g transform="matrix(0.0915987,0,0,0.0931271,48.1392,-24.2117)">
+                <path d="M271.426,275.024L271.426,290.182L282.765,290.182L282.765,275.024L271.426,275.024ZM271.426,291.782L271.426,304.355L282.765,304.355L282.765,291.782L271.426,291.782ZM271.426,305.955L271.426,322.088L282.765,319.612L282.765,305.955L271.426,305.955ZM282.765,321.249L271.426,323.727L271.426,336.596L282.765,334.119L282.765,321.249ZM282.765,335.755L271.426,338.234L271.426,416.755L282.765,416.755L282.765,335.755Z" style="fill-rule:nonzero;"/>
+                <path d="M235.893,291.782L225.682,298.069L235.893,304.355L294.223,304.355L294.223,291.782L235.893,291.782Z" style="fill-rule:nonzero;"/>
+                <path d="M316.143,313.957L305.12,316.365L259.159,326.407L261.843,338.69L307.804,328.649L318.828,326.24L327.46,317.919L316.143,313.957Z" style="fill-rule:nonzero;"/>
+            </g>
+        </g>
+    </g>
+</svg>
