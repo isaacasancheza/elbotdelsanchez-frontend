@@ -24,7 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <SessionProvider>
       <html lang="es-MX" className="h-full">
         <body className="h-full">
-          <SidebarProvider>
+          <SidebarProvider defaultOpen={false}>
             <AppSidebar />
             <MyRuntimeProvider>
               <SidebarInset>
