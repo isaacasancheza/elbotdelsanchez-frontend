@@ -29,7 +29,6 @@ export function MyRuntimeProvider({
         }),
         signal: abortSignal,
       })
-
       return await result.json()
     },
   }
