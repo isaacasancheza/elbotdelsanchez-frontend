@@ -10,6 +10,8 @@ import {
 } from '@assistant-ui/react-markdown'
 import { CheckIcon, CopyIcon } from 'lucide-react'
 import { type FC, memo, useState } from 'react'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
 
 import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button'
@@ -19,6 +21,7 @@ const MarkdownTextImpl = () => {
   return (
     <MarkdownTextPrimitive
       remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw, rehypeSanitize]}
       className="aui-md"
       components={defaultComponents}
     />
@@ -118,7 +121,10 @@ const defaultComponents = memoizeMarkdownComponents({
   ),
   p: ({ className, ...props }) => (
     <p
-      className={cn('mb-5 mt-5 leading-7 first:mt-0 last:mb-0', className)}
+      className={cn(
+        'mb-5 mt-5 leading-7 whitespace-pre-line first:mt-0 last:mb-0',
+        className,
+      )}
       {...props}
     />
   ),

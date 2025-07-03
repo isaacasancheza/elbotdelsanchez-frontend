@@ -19,7 +19,7 @@ interface RootLayoutProps {
   children: ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <SessionProvider>
       <html lang="es-MX" className="h-full">
