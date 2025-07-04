@@ -1,6 +1,11 @@
 import NextAuth, { Profile } from 'next-auth'
 import Cognito from 'next-auth/providers/cognito'
-import { AUTH_COGNITO_ID, AUTH_COGNITO_SECRET, SIGN_IN_URL } from './settings'
+import {
+  ADD_PASSKEY_URL,
+  AUTH_COGNITO_ID,
+  AUTH_COGNITO_ISSUER,
+  AUTH_COGNITO_SECRET,
+} from './settings'
 
 declare module 'next-auth' {
   interface Session {
@@ -12,12 +17,20 @@ declare module 'next-auth' {
   }
 }
 
+export const cognito = Cognito({
+  checks: ['state'],
+  issuer: AUTH_COGNITO_ISSUER,
+  clientId: AUTH_COGNITO_ID,
+  clientSecret: AUTH_COGNITO_SECRET,
+  authorization: {
+    params: {
+      lang: 'es',
+    },
+  },
+})
+
 export const { auth, signIn, signOut, handlers } = NextAuth({
-  providers: [
-    Cognito({
-      checks: ['none'],
-    }),
-  ],
+  providers: [cognito],
   callbacks: {
     async authorized({ auth }) {
       return !!auth
@@ -27,7 +40,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
         session.idToken = token.idToken as string
         session.profile = token.profile as Profile
         session.accessToken = token.accessToken as string
-        session.refreshToken = token.rereshToken as string
+        session.refreshToken = token.refreshToken as string
       }
       return session
     },
@@ -48,7 +61,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
 
       // token expired, refresh token
       else {
-        const url = new URL(SIGN_IN_URL)
+        const url = new URL(ADD_PASSKEY_URL)
         try {
           const response = await fetch(url.origin + `/oauth2/token`, {
             method: 'POST',

@@ -2,6 +2,7 @@
 
 import { ChevronsUpDown, Fingerprint, LogOut } from 'lucide-react'
 
+import { signOut } from '@/app/actions'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -18,8 +19,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { ADD_PASSKEY_URL, SIGN_OUT_URL } from '@/settings'
-import Link from 'next/link'
+import { ADD_PASSKEY_URL } from '@/settings'
 
 export function NavUser({
   user: { email = '', avatar = '', givenName = '', familyName = '' },
@@ -88,7 +88,11 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              <Link href={SIGN_OUT_URL}>Cerrar sesión</Link>
+              <form action={signOut}>
+                <button className="cursor-pointer" type="submit">
+                  Cerrar sesión
+                </button>
+              </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
