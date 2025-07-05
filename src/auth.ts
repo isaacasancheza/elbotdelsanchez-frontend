@@ -1,10 +1,10 @@
 import NextAuth, { Profile } from 'next-auth'
 import Cognito from 'next-auth/providers/cognito'
 import {
-  ADD_PASSKEY_URL,
   AUTH_COGNITO_ID,
   AUTH_COGNITO_ISSUER,
   AUTH_COGNITO_SECRET,
+  SIGN_OUT_URL,
 } from './settings'
 
 declare module 'next-auth' {
@@ -61,7 +61,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
 
       // token expired, refresh token
       else {
-        const url = new URL(ADD_PASSKEY_URL)
+        const url = new URL(SIGN_OUT_URL)
         try {
           const response = await fetch(url.origin + `/oauth2/token`, {
             method: 'POST',

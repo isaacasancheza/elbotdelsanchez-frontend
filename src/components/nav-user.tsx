@@ -1,13 +1,12 @@
 'use client'
 
-import { ChevronsUpDown, Fingerprint, LogOut } from 'lucide-react'
+import { ChevronsUpDown, LogOut } from 'lucide-react'
 
 import { signOut } from '@/app/actions'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -19,7 +18,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { ADD_PASSKEY_URL } from '@/settings'
 
 export function NavUser({
   user: { email = '', avatar = '', givenName = '', familyName = '' },
@@ -77,14 +75,6 @@ export function NavUser({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Fingerprint />
-                <a href={ADD_PASSKEY_URL} target="_blank">
-                  Agregar passkey
-                </a>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
