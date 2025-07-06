@@ -18,6 +18,7 @@ import {
   SendHorizontalIcon,
 } from 'lucide-react'
 import type { FC } from 'react'
+import { useRef } from 'react'
 
 import { MarkdownText } from '@/components/assistant-ui/markdown-text'
 import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button'
@@ -114,20 +115,26 @@ export const ThreadWelcomeSuggestions: FC = () => {
 }
 
 const Composer: FC = () => {
+  const inputRef = useRef<HTMLTextAreaElement>(null)
   return (
     <ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">
       <ComposerPrimitive.Input
+        ref={inputRef}
         rows={1}
         autoFocus={true}
         placeholder="Escribe un mensaje..."
         className="placeholder:text-muted-foreground max-h-40 flex-grow resize-none border-none bg-transparent px-2 py-4 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
       />
-      <ComposerAction />
+      <ComposerAction inputRef={inputRef} />
     </ComposerPrimitive.Root>
   )
 }
 
-const ComposerAction: FC = () => {
+type ComposerActionProps = {
+  inputRef: React.RefObject<HTMLTextAreaElement | null>
+}
+
+const ComposerAction: FC<ComposerActionProps> = ({ inputRef }) => {
   return (
     <>
       <ThreadPrimitive.If running={false}>
@@ -136,6 +143,7 @@ const ComposerAction: FC = () => {
             tooltip="Enviar"
             variant="default"
             className="my-2.5 size-8 p-2 transition-opacity ease-in"
+            onClick={() => inputRef.current?.blur()}
           >
             <SendHorizontalIcon />
           </TooltipIconButton>
