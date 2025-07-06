@@ -1,6 +1,6 @@
 'use client'
 
-import { ASSISTANT_UI_ENDPOINT } from '@/settings'
+import { CHAT_ENDPOINT } from '@/settings'
 import {
   AssistantRuntimeProvider,
   useLocalRuntime,
@@ -17,7 +17,7 @@ export function MyRuntimeProvider({
   const session = useSession()
   const MyModelAdapter: ChatModelAdapter = {
     async run({ messages, abortSignal }) {
-      const result = await fetch(ASSISTANT_UI_ENDPOINT, {
+      const result = await fetch(CHAT_ENDPOINT, {
         method: 'POST',
         headers: {
           'X-ID-Token': session.data!.idToken,

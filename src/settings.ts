@@ -3,6 +3,4 @@ export const AUTH_COGNITO_SECRET = process.env.AUTH_COGNITO_SECRET!
 export const AUTH_COGNITO_ISSUER = process.env.AUTH_COGNITO_ISSUER!
 
 export const SIGN_OUT_URL = process.env.NEXT_PUBLIC_SIGN_OUT_URL!
-
-export const ASSISTANT_UI_ENDPOINT =
-  process.env.NEXT_PUBLIC_ASSISTANT_UI_ENDPOINT!
+export const CHAT_ENDPOINT = process.env.NEXT_PUBLIC_CHAT_ENDPOINT!
