@@ -49,13 +49,13 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       if (account) {
         token.profile = profile
         token.idToken = account.id_token
-        token.expiresAt = account.expires_at
+        token.expiresAt = Date.now() + (account.expires_in ?? 3600) * 1000
         token.accessToken = account.access_token
         token.refreshToken = account.refresh_token
       }
 
       // check if token is still valid
-      else if (Date.now() < (token.expiresAt as number) * 1000) {
+      else if (Date.now() < (token.expiresAt as number)) {
         return token
       }
 
@@ -85,22 +85,22 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
 
           // failed to refresh token, re-login
           if (!response.ok) {
-            return null
+            token.error = 'RefreshAccessTokenError'
+            return token
           }
 
           return {
             ...token,
             idToken: jwt.id_token,
             accessToken: jwt.access_token,
-            expiresAt: Math.floor(Date.now() / 1000 + jwt.expires_in),
+            expiresAt: Date.now() + jwt.expires_in * 1000,
             // refresh token rotation
-            refreshToken: jwt.refresh_token
-              ? jwt.refresh_token
-              : token.refreshToken,
+            refreshToken: jwt.refresh_token ?? token.refreshToken,
           }
-        } catch {
-          // failed to refresh token, re-login
-          return null
+        } catch (err) {
+          console.error('Failed to refresh token:', err)
+          token.error = 'RefreshAccessTokenError'
+          return token
         }
       }
       return token
