@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/lib/utils'
 import {
   ActionBarPrimitive,
@@ -81,35 +83,35 @@ const ThreadWelcome: FC = () => {
             {session.data ? `Hola, ${session.data.profile.given_name}` : 'Hola'}
           </p>
         </div>
-        {/* <ThreadWelcomeSuggestions /> */}
+        <ThreadWelcomeSuggestions />
       </div>
     </ThreadPrimitive.Empty>
   )
 }
 
 export const ThreadWelcomeSuggestions: FC = () => {
+  const session = useSession()
+  const suggestions: string[] = []
+  if (session?.data?.groups?.includes('admins')) {
+    suggestions.push('Muéstrame las últimas imágenes de la cámara')
+  } else {
+    suggestions.push('Pásame el recibo de luz')
+  }
   return (
     <div className="mt-3 flex w-full items-stretch justify-center gap-4">
-      <ThreadPrimitive.Suggestion
-        className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-        prompt="What is the weather in Tokyo?"
-        method="replace"
-        autoSend
-      >
-        <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is the weather in Tokyo?
-        </span>
-      </ThreadPrimitive.Suggestion>
-      <ThreadPrimitive.Suggestion
-        className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-        prompt="What is assistant-ui?"
-        method="replace"
-        autoSend
-      >
-        <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is assistant-ui?
-        </span>
-      </ThreadPrimitive.Suggestion>
+      {suggestions.map((suggestion) => (
+        <ThreadPrimitive.Suggestion
+          key={suggestion}
+          className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
+          prompt={suggestion}
+          method="replace"
+          autoSend
+        >
+          <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
+            {suggestion}
+          </span>
+        </ThreadPrimitive.Suggestion>
+      ))}
     </div>
   )
 }

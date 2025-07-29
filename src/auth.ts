@@ -9,6 +9,7 @@ import {
 
 declare module 'next-auth' {
   interface Session {
+    groups: string[]
     idToken: string
     profile: Profile
     expiresAt: number
@@ -41,6 +42,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
         session.profile = token.profile as Profile
         session.accessToken = token.accessToken as string
         session.refreshToken = token.refreshToken as string
+        session.groups = (session.profile['cognito:groups'] as string[]) ?? []
       }
       return session
     },
