@@ -93,7 +93,7 @@ export const ThreadWelcomeSuggestions: FC = () => {
   const session = useSession()
   const suggestions: string[] = []
   if (session?.data?.groups?.includes('admins')) {
-    suggestions.push('Muéstrame las últimas imágenes de la cámara')
+    suggestions.push('Muéstrame las últimas capturas de la cámara')
   } else {
     suggestions.push('Pásame el recibo de luz')
   }
