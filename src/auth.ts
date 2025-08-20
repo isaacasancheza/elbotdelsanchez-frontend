@@ -62,7 +62,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       }
 
       // token expired, refresh token
-      else {
+      else if (Date.now() >= (token.expiresAt as number)) {
         const url = new URL(SIGN_OUT_URL)
         try {
           const response = await fetch(url.origin + `/oauth2/token`, {
@@ -74,12 +74,11 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
               'Content-Type': 'application/x-www-form-urlencoded',
             },
             cache: 'no-cache',
-            credentials: 'include',
             body: new URLSearchParams({
-              client_id: AUTH_COGNITO_ID,
-              client_secret: AUTH_COGNITO_SECRET,
               grant_type: 'refresh_token',
               refresh_token: token!.refreshToken as string,
+              client_id: AUTH_COGNITO_ID,
+              client_secret: AUTH_COGNITO_SECRET,
             }),
           })
 
@@ -96,7 +95,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             idToken: jwt.id_token,
             accessToken: jwt.access_token,
             expiresAt: Date.now() + jwt.expires_in * 1000,
-            // refresh token rotation
             refreshToken: jwt.refresh_token ?? token.refreshToken,
           }
         } catch (err) {

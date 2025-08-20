@@ -90,13 +90,7 @@ const ThreadWelcome: FC = () => {
 }
 
 export const ThreadWelcomeSuggestions: FC = () => {
-  const session = useSession()
-  const suggestions: string[] = []
-  if (session?.data?.groups?.includes('admins')) {
-    suggestions.push('Muéstrame las últimas capturas de la cámara')
-  } else {
-    suggestions.push('Pásame el recibo de luz')
-  }
+  const suggestions: string[] = ['Pásame el recibo de luz']
   return (
     <div className="mt-3 flex w-full items-stretch justify-center gap-4">
       {suggestions.map((suggestion) => (
