@@ -27,6 +27,11 @@ import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button
 import { Button } from '@/components/ui/button'
 import { useSession } from 'next-auth/react'
 
+const SUGGESTIONS: string[] = [
+  'Pásame el recibo de luz',
+  '¿Cuánto es el consumo de luz?',
+]
+
 export const Thread: FC = () => {
   return (
     <ThreadPrimitive.Root
@@ -90,10 +95,9 @@ const ThreadWelcome: FC = () => {
 }
 
 export const ThreadWelcomeSuggestions: FC = () => {
-  const suggestions: string[] = ['Pásame el recibo de luz']
   return (
     <div className="mt-3 flex w-full items-stretch justify-center gap-4">
-      {suggestions.map((suggestion) => (
+      {SUGGESTIONS.map((suggestion) => (
         <ThreadPrimitive.Suggestion
           key={suggestion}
           className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
